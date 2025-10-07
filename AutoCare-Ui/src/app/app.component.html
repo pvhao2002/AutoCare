@@ -1,0 +1,136 @@
+<div class="orbs" aria-hidden="true"></div>
+
+<main class="main" role="main" aria-label="Đăng nhập AutoShield">
+  <!-- Brand / Value panel -->
+  <div class="wrap">
+    <section class="card brand" aria-label="Giới thiệu">
+      <div>
+        <div class="logo" aria-label="AutoShield">
+          <!-- Logo -->
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M24 4l14 6v8c0 10-6.8 18.9-14 22-7.2-3.1-14-12-14-22V10l14-6z" stroke="url(#g1)"
+                  stroke-width="2.5"/>
+            <path d="M12 21h24M16 17h16M14 25h8m14 0h-8" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="g1" x1="0" x2="48" y1="0" y2="48" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#16b2a5"/>
+                <stop offset="1" stop-color="#ffb34d"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" x2="48" y1="0" y2="48" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#eaf2ff"/>
+                <stop offset="1" stop-color="#b8c4d9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div>
+            <h1>AutoShield</h1>
+            <div class="badges">
+              <span class="badge">An toàn</span>
+              <span class="badge">Nhanh chóng</span>
+              <span class="badge">Tin cậy</span>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:12px">
+          <b>AutoShield</b> là nền tảng quản lý và tra cứu dịch vụ bảo dưỡng ô tô hiện đại –
+          giúp khách hàng dễ dàng đặt lịch, theo dõi quá trình sửa chữa,
+          và lưu trữ thông tin xe của mình một cách bảo mật tuyệt đối.
+        </p>
+
+        <ul class="features" aria-label="Tính năng nổi bật">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Đăng nhập an toàn – bảo vệ thông tin cá nhân
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Quản lý lịch bảo dưỡng và tra cứu nhanh bằng mã QR
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Hóa đơn điện tử được ký số, lưu trữ an toàn
+          </li>
+        </ul>
+
+        <div class="stats" aria-label="Chỉ số hệ thống">
+          <div class="pill"><b>99.9%</b><small>Hoạt động ổn định</small></div>
+          <div class="pill"><b>24/7</b><small>Hỗ trợ khách hàng</small></div>
+          <div class="pill"><b>100%</b><small>Bảo mật dữ liệu</small></div>
+        </div>
+      </div>
+      <p class="legal">
+        © 2025 AutoShield • Dịch vụ bảo dưỡng thông minh & an toàn cho bạn
+      </p>
+    </section>
+
+    <!-- Login form -->
+    <section class="card form" aria-label="Biểu mẫu đăng nhập">
+      <div>
+        <h2>Đăng nhập</h2>
+        <p class="subtitle">Truy cập bảng điều khiển quản trị & nghiệp vụ.</p>
+      </div>
+
+      <form novalidate onsubmit="return false" aria-label="Form đăng nhập">
+        <div class="group">
+          <label for="email">Email hoặc tên đăng nhập</label>
+          <div class="input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 6l8 6 8-6M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <input id="email" name="email" type="email" autocomplete="username"
+                   placeholder="you@autoshield.vn" required/>
+          </div>
+        </div>
+
+        <div class="group">
+          <label for="password">Mật khẩu</label>
+          <div class="input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 10V8a5 5 0 1110 0v2M6 10h12v9H6z" stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round"/>
+            </svg>
+            <input id="password" name="password" type="password" autocomplete="current-password"
+                   placeholder="••••••••" required minlength="6"/>
+            <button class="icon" type="button" aria-label="Hiện/ẩn mật khẩu" onclick="togglePwd()">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+            <input type="checkbox" id="remember" style="accent-color: var(--primary)">
+            <span>Ghi nhớ tôi</span>
+          </label>
+          <a href="#" aria-label="Quên mật khẩu">Quên mật khẩu?</a>
+        </div>
+
+        <button class="btn" type="submit" onclick="fakeSubmit()">
+          Đăng nhập
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="#063b36" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="divider">hoặc</div>
+
+        <div class="alt">
+          <button class="ghost" type="button" onclick="alert('Sắp có: Đăng nhập bằng mã QR!')">Quét QR</button>
+          <button class="ghost" type="button" onclick="alert('Sắp có: SSO tổ chức!')">SSO</button>
+        </div>
+      </form>
+
+      <p class="legal">
+        Khi tiếp tục, bạn đồng ý với <a href="#" style="color:var(--accent)">Điều khoản</a> &amp;
+        <a href="#" style="color:var(--accent)">Chính sách bảo mật</a>.
+      </p>
+    </section>
+  </div>
+</main>

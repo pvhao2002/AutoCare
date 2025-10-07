@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+actor "Khách hàng" as KH
+actor "Nhân viên tiếp nhận" as NV
+actor "Kỹ thuật viên" as KT
+actor "Kế toán viên" as KT_Vien
+actor "Quản lý trung tâm" as QL
+
+rectangle "Hệ thống nghiệp vụ bảo dưỡng ô tô" {
+    usecase "Tiếp nhận yêu cầu dịch vụ" as UC1
+    usecase "Kiểm tra và chuẩn đoán xe" as UC2
+    usecase "Lập phiếu đề xuất vật tư" as UC3
+    usecase "Thực hiện bảo dưỡng" as UC4
+    usecase "Lập hóa đơn và thanh toán" as UC5
+    usecase "Báo cáo hoạt động" as UC6
+}
+
+KH --> UC1
+NV --> UC1
+UC1 --> UC2
+KT --> UC2
+KT --> UC3
+UC3 --> UC4
+KT --> UC4
+KT_Vien --> UC5
+UC4 --> UC5
+QL --> UC6
+UC5 --> UC6
+NV --> UC6
+
+@enduml
+
+==============================================
+==============================================
+
+
+
+@startuml
+left to right direction
+actor "Admin" as Admin
+actor "Nhân viên tiếp nhận" as NV
+actor "Kế toán viên" as KT
+actor "Khách hàng (qua QR/Web)" as KH
+
+rectangle "Hệ thống ứng dụng bảo dưỡng ô tô" {
+    usecase "Đăng nhập hệ thống" as UC1
+    usecase "Phân quyền truy cập (MAC/DAC)" as UC2
+    usecase "Quản lý khách hàng & dịch vụ" as UC3
+    usecase "Quản lý hóa đơn (ký số)" as UC4
+    usecase "Tra cứu dịch vụ bằng QR" as UC5
+    usecase "Kiểm toán truy cập (Audit/FGA)" as UC6
+    usecase "Sao lưu & phục hồi dữ liệu" as UC7
+}
+
+Admin --> UC1
+NV --> UC1
+KT --> UC1
+
+Admin --> UC2
+Admin --> UC6
+Admin --> UC7
+
+NV --> UC3
+KT --> UC4
+KH --> UC5
+
+UC1 --> UC2
+UC1 --> UC3
+UC1 --> UC4
+UC3 --> UC5
+UC4 --> UC6
+
+@enduml

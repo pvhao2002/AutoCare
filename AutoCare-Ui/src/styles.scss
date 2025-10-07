@@ -1,0 +1,333 @@
+/* You can add global styles to this file, and also import other style files */
+/* ========= THEME ========= */
+:root {
+  --bg-1: #0b1220; /* deep navy */
+  --bg-2: #0f2840; /* blue */
+  --glass: rgba(255, 255, 255, .08);
+  --stroke: rgba(255, 255, 255, .15);
+  --text: #eaf2ff;
+  --muted: #b8c4d9;
+  --primary: #16b2a5; /* teal */
+  --primary-600: #0f968a;
+  --accent: #ffb34d; /* amber accent */
+  --danger: #ff6b6b;
+
+  --radius-xl: 20px;
+  --radius-lg: 14px;
+  --shadow-1: 0 8px 30px rgba(0, 0, 0, .35);
+  --shadow-2: 0 20px 60px rgba(0, 0, 0, .45);
+  --blur: saturate(140%) blur(10px);
+}
+
+/* ========= RESET ========= */
+* {
+  box-sizing: border-box
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+
+}
+
+/* ========= BACKDROP ORNAMENTS ========= */
+.orbs {
+  position: fixed;
+  inset: -20vmax;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(45vmax 45vmax at 20% 15%, rgba(22, 178, 165, .25), transparent 60%),
+  radial-gradient(35vmax 35vmax at 85% 80%, rgba(255, 179, 77, .18), transparent 60%),
+  radial-gradient(30vmax 30vmax at 70% 10%, rgba(39, 115, 255, .12), transparent 60%);
+  filter: blur(20px);
+  animation: float 18s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(-1%)
+  }
+  100% {
+    transform: translateY(1%)
+  }
+}
+
+/* ========= CARD ========= */
+.main {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.wrap {
+  width: min(100%, 1020px);
+  padding: clamp(16px, 3vw, 40px);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(18px, 2.4vw, 28px);
+  align-items: stretch;
+}
+
+.card {
+  background: var(--glass);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-xl);
+  backdrop-filter: var(--blur);
+  box-shadow: var(--shadow-1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========= BRAND PANEL ========= */
+.brand {
+  padding: clamp(28px, 3.2vw, 42px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .04), transparent 60%),
+  radial-gradient(1200px 300px at -10% -20%, rgba(255, 255, 255, .08), transparent 50%);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+.logo svg {
+  width: 38px;
+  height: 38px;
+}
+
+.brand h1 {
+  margin: .4rem 0 0;
+  font-size: clamp(22px, 2.2vw, 28px);
+}
+
+.brand p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #0e161f;
+  background: linear-gradient(180deg, #d8fff8, #8df2e5);
+  border: 1px solid rgba(255, 255, 255, .25);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stats .pill {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.pill b {
+  display: block;
+  color: var(--accent);
+  font-size: 18px
+}
+
+.features {
+  margin-top: 22px;
+  display: grid;
+  gap: 10px;
+}
+
+.features li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted)
+}
+
+.features svg {
+  width: 18px;
+  height: 18px;
+  color: var(--primary)
+}
+
+/* ========= FORM PANEL ========= */
+.form {
+  padding: clamp(28px, 3.2vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form h2 {
+  margin: 0;
+  font-size: clamp(20px, 2vw, 24px);
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: -6px
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-size: 14px;
+  color: var(--muted)
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  transition: .2s border, .2s background;
+}
+
+.input:focus-within {
+  border-color: rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .09)
+}
+
+.input input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  font-size: 15px;
+  letter-spacing: .2px;
+}
+
+.input button.icon {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.row a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 14px
+}
+
+.row a:hover {
+  text-decoration: underline
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, var(--primary), var(--primary-600));
+  color: #082022;
+  font-weight: 700;
+  letter-spacing: .25px;
+  cursor: pointer;
+  box-shadow: var(--shadow-2);
+  transition: transform .06s ease, filter .2s ease;
+}
+
+.btn:hover {
+  filter: saturate(110%) brightness(1.05)
+}
+
+.btn:active {
+  transform: translateY(1px)
+}
+
+.alt {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.alt .ghost {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .05);
+  color: var(--text);
+  border: 1px dashed var(--stroke);
+  cursor: pointer;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.divider::before, .divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .25), transparent);
+}
+
+.legal {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.5
+}
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 860px) {
+  .wrap {
+    grid-template-columns: 1fr
+  }
+  .brand {
+    order: 2
+  }
+  .form {
+    order: 1
+  }
+}

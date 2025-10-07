@@ -1,0 +1,42 @@
+.idea
+
+
+/AutoCare-Service/HELP.md
+/AutoCare-Service/target/
+/AutoCare-Service/.mvn/wrapper/maven-wrapper.jar
+/AutoCare-Service/!**/src/main/**/target/
+/AutoCare-Service/!**/src/test/**/target/
+
+### STS ###
+/AutoCare-Service/.apt_generated
+/AutoCare-Service/.classpath
+/AutoCare-Service/.factorypath
+/AutoCare-Service/.project
+/AutoCare-Service/.settings
+/AutoCare-Service/.springBeans
+/AutoCare-Service/.sts4-cache
+
+### IntelliJ IDEA ###
+/AutoCare-Service/.idea
+/AutoCare-Service/*.iws
+/AutoCare-Service/*.iml
+/AutoCare-Service/*.ipr
+
+### NetBeans ###
+/AutoCare-Service/nbproject/private/
+/AutoCare-Service/nbbuild/
+/AutoCare-Service/dist/
+/AutoCare-Service/nbdist/
+/AutoCare-Service/.nb-gradle/
+/AutoCare-Service/build/
+/AutoCare-Service/!**/src/main/**/build/
+/AutoCare-Service/!**/src/test/**/build/
+
+### VS Code ###
+/AutoCare-Service/.vscode/
+
+/AutoCare-Mobile/.vscode/
+/AutoCare-Mobile/node_modules/
+
+/AutoCare-Ui/.vscode/
+/AutoCare-Ui/node_modules/
