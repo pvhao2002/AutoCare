@@ -1,0 +1,283 @@
+<!-- KPI ROW -->
+<section id="dashboard" class="grid" aria-labelledby="dashboard-title" style="margin-bottom:14px">
+  <div class="card" style="grid-column: 1 / -1;">
+    <h3 id="dashboard-title">Dashboard • Tổng quan</h3>
+    <p class="muted">Project focus: secure auto maintenance operations with Oracle security (VPD/OLS, FGA, QR, Digital
+      Signature).
+    </p>
+    <div class="kpis" role="list">
+      <div class="kpi accent" role="listitem" aria-label="Active orders">
+        <div class="muted">Active Orders</div>
+        <div class="val">128</div>
+      </div>
+      <div class="kpi ok" role="listitem" aria-label="Security policy coverage">
+        <div class="muted">Policy Coverage</div>
+        <div class="val">100% VPD</div>
+      </div>
+      <div class="kpi" role="listitem" aria-label="QR verifications today">
+        <div class="muted">QR Verifications</div>
+        <div class="val">342</div>
+      </div>
+      <div class="kpi warn" role="listitem" aria-label="Audit alerts">
+        <div class="muted">Audit Alerts</div>
+        <div class="val">3</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK ACTIONS + SEARCH -->
+<section class="grid" style="margin-bottom:14px">
+  <div class="card" style="grid-column: 1 / span 8;">
+    <h3>Quick Actions • Thao tác nhanh</h3>
+    <div class="toolbar">
+      <button class="btn">Create Service</button>
+      <button class="btn">Add Customer</button>
+      <button class="btn">Generate Invoice</button>
+      <button class="btn">Scan QR</button>
+    </div>
+  </div>
+  <div class="card" style="grid-column: 9 / -1;">
+    <h3>Search • Tìm kiếm</h3>
+    <div class="form">
+      <label class="field">
+        <span class="muted">Keyword</span>
+        <input class="input" placeholder="Order ID, Customer name, Plate..."/>
+      </label>
+      <label class="field">
+        <span class="muted">Filter</span>
+        <select class="select">
+          <option>All</option>
+          <option>Orders</option>
+          <option>Customers</option>
+          <option>Invoices</option>
+          <option>Security Events</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES TABLE -->
+<section id="services" class="grid" aria-labelledby="services-title">
+  <div class="card" style="grid-column: 1 / -1;">
+    <h3 id="services-title">Services • Dịch vụ</h3>
+    <table class="table" role="table" aria-label="Services table">
+      <thead>
+      <tr>
+        <th>Service</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Policy (VPD/OLS)</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Engine Check</td>
+        <td>Diagnostics</td>
+        <td>$40</td>
+        <td>VPD: branch_scope</td>
+        <td>
+              <span class="status ok">
+                <svg width="10" height="10">
+                  <circle cx="5" cy="5" r="5" fill="#10b981"/>
+                </svg>
+                <span>Active</span>
+              </span>
+        </td>
+      </tr>
+      <tr>
+        <td>Oil Change</td>
+        <td>Maintenance</td>
+        <td>$25</td>
+        <td>VPD+OLS: tier:confidential</td>
+        <td>
+              <span class="status ok">
+                <svg width="10" height="10">
+                  <circle cx="5" cy="5" r="5" fill="#10b981"/>
+                </svg>
+                <span>Active</span>
+              </span>
+        </td>
+      </tr>
+      <tr>
+        <td>Brake Service</td>
+        <td>Repair</td>
+        <td>$70</td>
+        <td>VPD: role_scope</td>
+        <td>
+              <span class="status warn">
+                <svg width="10" height="10">
+                  <circle cx="5" cy="5" r="5" fill="#f43f5e"/>
+                </svg>
+                <span>Paused</span>
+              </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECURITY PANEL -->
+<section id="security" class="grid" style="margin-top:14px" aria-labelledby="security-title">
+  <div class="card" style="grid-column: 1 / span 6;">
+    <h3 id="security-title">Security Policies • Chính sách bảo mật</h3>
+    <ul class="muted" style="margin:6px 0 0 18px">
+      <li>
+        <strong>VPD:</strong>
+        row-level policies by branch, role, and tenant.
+      </li>
+      <li>
+        <strong>OLS:</strong>
+        labels<em>public/confidential/restricted</em>.
+      </li>
+      <li>
+        <strong>Profile & Auth:</strong>
+        password complexity, lockout, session limits.
+      </li>
+      <li>
+        <strong>Digital Signature:</strong>
+        Oracle Wallet/PKI for invoices.
+      </li>
+    </ul>
+    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+      <button class="btn">Manage VPD</button>
+      <button class="btn">Manage OLS</button>
+      <button class="btn">Profiles</button>
+      <button class="btn">Keys & Wallet</button>
+    </div>
+  </div>
+  <div class="card" style="grid-column: 7 / -1;">
+    <h3>QR & e-Sign • QR & Chữ ký số</h3>
+    <div class="muted">Generate QR for service lookup; sign invoices with PKI.</div>
+    <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:wrap">
+      <div class="kpi" style="min-width:180px">
+        <div class="muted">QR Generated (7d)</div>
+        <div class="val">1,482</div>
+      </div>
+      <div class="kpi ok" style="min-width:180px">
+        <div class="muted">Signed Invoices</div>
+        <div class="val">100%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT & BACKUP -->
+<section id="audit" class="grid" style="margin-top:14px" aria-labelledby="audit-title">
+  <div class="card" style="grid-column: 1 / span 7;">
+    <h3 id="audit-title">Auditing (FGA & Standard) • Kiểm toán</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Time</th>
+        <th>User</th>
+        <th>Action</th>
+        <th>Object</th>
+        <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>2025-10-20 09:40</td>
+        <td>emp_ha</td>
+        <td>UPDATE</td>
+        <td>CUSTOMER</td>
+        <td>
+              <span class="status ok">
+                <svg width="10" height="10">
+                  <circle cx="5" cy="5" r="5" fill="#10b981"/>
+                </svg>
+                <span>OK</span>
+              </span>
+        </td>
+      </tr>
+      <tr>
+        <td>2025-10-20 09:12</td>
+        <td>emp_ty</td>
+        <td>SELECT</td>
+        <td>INVOICE</td>
+        <td>
+              <span class="status ok">
+                <svg width="10" height="10">
+                  <circle cx="5" cy="5" r="5" fill="#10b981"/>
+                </svg>
+                <span>Logged</span>
+              </span>
+        </td>
+      </tr>
+      <tr>
+        <td>2025-10-20 08:59</td>
+        <td>emp_an</td>
+        <td>DELETE</td>
+        <td>SERVICE</td>
+        <td>
+              <span class="status warn">
+                <svg width="10" height="10">
+                  <circle cx="5" cy="5" r="5" fill="#f43f5e"/>
+                </svg>
+                <span>Denied</span>
+              </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="backup" class="card" style="grid-column: 8 / -1;">
+    <h3>Backup & Recovery • Sao lưu & Phục hồi</h3>
+    <div class="muted">RMAN nightly backups, weekly full, 30-day retention.</div>
+    <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
+      <button class="btn">Run Backup</button>
+      <button class="btn">Restore Point</button>
+      <button class="btn">Policies</button>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE FORM -->
+<section id="customers" class="grid" style="margin-top:14px" aria-labelledby="cust-title">
+  <div class="card" style="grid-column:1 / span 6;">
+    <h3 id="cust-title">New Customer • Khách hàng mới</h3>
+    <form class="form" onsubmit="event.preventDefault(); alert('Saved!');">
+      <label class="field">
+        <span class="muted">Full name</span>
+        <input class="input" placeholder="Nguyễn Văn A" required/>
+      </label>
+      <label class="field">
+        <span class="muted">Phone</span>
+        <input class="input" placeholder="+84 ..."/>
+      </label>
+      <label class="field">
+        <span class="muted">Branch</span>
+        <select class="select">
+          <option>HCM</option>
+          <option>HN</option>
+        </select>
+      </label>
+      <label class="field">
+        <span class="muted">Security label (OLS)</span>
+        <select class="select">
+          <option>public</option>
+          <option>confidential</option>
+          <option>restricted</option>
+        </select>
+      </label>
+      <div style="grid-column:1 / -1; display:flex; gap:8px; margin-top:4px">
+        <button class="btn" type="submit">Save</button>
+        <button class="btn" type="button" onclick="alert('QR generated!')">Generate QR</button>
+      </div>
+    </form>
+  </div>
+  <div class="card" style="grid-column:7 / -1;">
+    <h3>Notes • Ghi chú</h3>
+    <p class="muted">All customer reads/writes are audited. Visibility restricted by VPD policy to branch & role.</p>
+    <ul class="muted" style="margin-left:18px">
+      <li>Password & keys stored in Oracle Wallet</li>
+      <li>Sensitive fields encrypted at rest</li>
+      <li>Session profiles limit idle time & attempts</li>
+    </ul>
+  </div>
+</section>
+

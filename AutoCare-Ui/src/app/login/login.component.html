@@ -1,0 +1,66 @@
+<div class="login-bg" aria-hidden="true"></div>
+
+<main class="login-container" role="main" aria-label="Đăng nhập AutoCare">
+  <section class="login-card">
+    <div class="login-brand">
+      <svg class="brand-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M24 4l14 6v8c0 10-6.8 18.9-14 22-7.2-3.1-14-12-14-22V10l14-6z"
+              stroke="url(#g1)" stroke-width="2.5"/>
+        <path d="M12 21h24M16 17h16M14 25h8m14 0h-8"
+              stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="g1" x1="0" x2="48" y1="0" y2="48" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#16b2a5"/>
+            <stop offset="1" stop-color="#ffb34d"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" x2="48" y1="0" y2="48" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#eaf2ff"/>
+            <stop offset="1" stop-color="#b8c4d9"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div>
+        <h1>AutoCare Secure</h1>
+        <p class="subtitle">Hệ thống quản lý & bảo dưỡng ô tô an toàn</p>
+      </div>
+    </div>
+
+    <form class="login-form" (ngSubmit)="onLogin()">
+      <label>
+        <span>Email hoặc tên đăng nhập</span>
+        <input type="text" [(ngModel)]="username" name="username" required placeholder="you@autocare.vn"/>
+      </label>
+
+      <label>
+        <span>Mật khẩu</span>
+        <div class="password">
+          <input [type]="showPwd ? 'text' : 'password'" [(ngModel)]="password"
+                 name="password" required placeholder="••••••••"/>
+          <button type="button" (click)="togglePwd()" aria-label="Hiện/ẩn mật khẩu">
+            {{ showPwd ? '🙈' : '👁️' }}
+          </button>
+        </div>
+      </label>
+
+      <div class="remember-row">
+        <label>
+          <input type="checkbox" [(ngModel)]="remember" name="remember"/> Ghi nhớ tôi
+        </label>
+        <a routerLink="/forgot-password">Quên mật khẩu?</a>
+      </div>
+
+      <button type="submit" class="btn-primary">Đăng nhập</button>
+
+      <div class="divider">hoặc</div>
+
+      <div class="alt-login">
+        <button type="button" class="ghost" (click)="onQR()">Quét QR</button>
+        <button type="button" class="ghost" (click)="onSSO()">SSO</button>
+      </div>
+    </form>
+
+    <p class="legal">
+      © 2025 AutoCare • Bảo mật Oracle VPD / OLS / FGA
+    </p>
+  </section>
+</main>

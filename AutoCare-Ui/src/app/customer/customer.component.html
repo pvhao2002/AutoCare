@@ -1,0 +1,112 @@
+<main class="wrap">
+  <section class="grid">
+    <div class="card" style="grid-column:1 / -1;">
+      <h2>Quản lý khách hàng</h2>
+      <p class="muted">
+        Theo dõi, thêm mới và chỉnh sửa thông tin khách hàng.
+        Mỗi khách hàng có thể sinh mã QR để tra cứu nhanh tại điểm dịch vụ.
+      </p>
+
+      <div class="toolbar">
+        <button class="btn" (click)="openCreateForm()">+ Thêm khách hàng</button>
+        <input type="text" class="input" placeholder="Tìm kiếm khách hàng..."
+               [(ngModel)]="searchTerm" (input)="filterCustomers()"/>
+      </div>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Họ tên</th>
+          <th>Điện thoại</th>
+          <th>Chi nhánh</th>
+          <th>Nhãn bảo mật</th>
+          <th>Trạng thái</th>
+          <th>QR</th>
+          <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (c of filteredCustomers; track c.id) {
+            <tr>
+              <td>{{ c.name }}</td>
+              <td>{{ c.phone }}</td>
+              <td>{{ c.branch }}</td>
+              <td>
+                <span class="status"
+                      [ngClass]="{ 'ok': c.securityLabel === 'public', 'warn': c.securityLabel === 'confidential' }">
+                  {{ c.securityLabel }}
+                </span>
+              </td>
+              <td>
+                <span class="status" [ngClass]="c.active ? 'ok' : 'warn'">
+                  {{ c.active ? 'Hoạt động' : 'Tạm khóa' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn small" (click)="generateQR(c)">QR</button>
+              </td>
+              <td>
+                <button class="btn small" (click)="editCustomer(c)">Sửa</button>
+                <button class="btn small danger" (click)="deleteCustomer(c)">Xóa</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" style="text-align:center; padding:20px; color:#666;">
+                Không tìm thấy khách hàng nào.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  @if (showForm) {
+    <section class="modal-backdrop">
+      <div class="modal">
+        <h3>{{ editMode ? 'Cập nhật khách hàng' : 'Thêm khách hàng mới' }}</h3>
+        <form (ngSubmit)="saveCustomer()">
+          <label>Họ và tên <input class="input" [(ngModel)]="form.name" name="name" required/></label>
+          <label>Số điện thoại <input class="input" [(ngModel)]="form.phone" name="phone" required/></label>
+          <label>Chi nhánh
+            <select class="select" [(ngModel)]="form.branch" name="branch">
+              <option value="HCM">HCM</option>
+              <option value="HN">HN</option>
+            </select>
+          </label>
+          <label>Nhãn bảo mật (OLS)
+            <select class="select" [(ngModel)]="form.securityLabel" name="label">
+              <option value="public">public</option>
+              <option value="confidential">confidential</option>
+              <option value="restricted">restricted</option>
+            </select>
+          </label>
+          <label>Trạng thái
+            <select class="select" [(ngModel)]="form.active" name="active">
+              <option [ngValue]="true">Hoạt động</option>
+              <option [ngValue]="false">Tạm khóa</option>
+            </select>
+          </label>
+          <div class="form-actions">
+            <button class="btn" type="submit">Lưu</button>
+            <button class="btn" type="button" (click)="closeForm()">Hủy</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  }
+
+  @if (showQR) {
+    <section class="modal-backdrop">
+      <div class="modal qr">
+        <h3>Mã QR Khách hàng</h3>
+        <img [src]="qrImageData" alt="QR code" class="qr-image"/>
+        <div class="form-actions">
+          <button class="btn" type="button" (click)="downloadQR()">Tải về</button>
+          <button class="btn" type="button" (click)="closeQR()">Đóng</button>
+        </div>
+      </div>
+    </section>
+  }
+</main>

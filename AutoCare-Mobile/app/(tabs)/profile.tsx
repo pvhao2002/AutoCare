@@ -5,15 +5,20 @@ import {ThemedView} from '@/components/themed-view';
 import {ThemedText} from '@/components/themed-text';
 import {useTheme} from '@/hooks/use-theme';
 import {Href, useRouter} from 'expo-router';
-import {logoutUser} from '@/hooks/useAuth';
+import {getUserToken, logoutUser} from '@/hooks/useAuth';
 
 export default function ProfileScreen() {
     const {colors} = useTheme();
     const router = useRouter();
 
     const handleLogout = async () => {
+        console.log('Logging out...');
+        const u = await getUserToken();
+        console.log('Current token:', u);
         await logoutUser();
-        router.replace('/(auth)/login');
+        const u2 = await getUserToken();
+        console.log('Token after logout:', u2);
+        router.replace('/login');
     };
 
     const settings: { icon: string; label: string; route: Href }[] = [

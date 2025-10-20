@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: AutoCare-Service
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/XE
+    username: AUTOCAR
+    password: autocar123
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.OracleDialect
+
+server:
+  port: 6868
+  servlet:
+    context-path: /api

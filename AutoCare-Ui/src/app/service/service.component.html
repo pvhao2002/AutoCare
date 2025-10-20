@@ -1,0 +1,118 @@
+<main class="wrap">
+  <section class="grid">
+    <div class="card" style="grid-column:1 / -1;">
+      <h2>Quản lý dịch vụ</h2>
+      <p class="muted">
+        Theo dõi, thêm mới và cập nhật thông tin các loại dịch vụ bảo dưỡng.
+        Mỗi dịch vụ được gắn nhãn bảo mật (VPD/OLS) và trạng thái hoạt động.
+      </p>
+
+      <div class="toolbar">
+        <button class="btn" (click)="openCreateForm()">+ Thêm dịch vụ</button>
+        <input type="text" class="input" placeholder="Tìm kiếm dịch vụ..."
+               [(ngModel)]="searchTerm" (input)="filterServices()"/>
+      </div>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Tên dịch vụ</th>
+          <th>Loại</th>
+          <th>Giá (₫)</th>
+          <th>Nhãn bảo mật</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+        </thead>
+
+        <tbody>
+          @for (s of filteredServices; track s.id) {
+            <tr>
+              <td>{{ s.name }}</td>
+              <td>{{ s.type }}</td>
+              <td>{{ s.price | number }}</td>
+              <td>
+                <span class="status"
+                      [ngClass]="{
+                        'ok': s.securityLabel === 'public',
+                        'warn': s.securityLabel === 'confidential'
+                      }">
+                  <span>{{ s.securityLabel }}</span>
+                </span>
+              </td>
+              <td>
+                <span class="status" [ngClass]="s.active ? 'ok' : 'warn'">
+                  <span>{{ s.active ? 'Hoạt động' : 'Tạm dừng' }}</span>
+                </span>
+              </td>
+              <td>
+                <button class="btn" style="padding:6px 10px" (click)="editService(s)">
+                  Sửa
+                </button>
+                <button class="btn"
+                        style="padding:6px 10px; background:linear-gradient(180deg,#f43f5e,#b91c1c)"
+                        (click)="deleteService(s)">
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" style="text-align:center; color:#94a3b8; padding:14px">
+                Không có dịch vụ nào được tìm thấy.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ✅ Modal thêm/sửa -->
+  @if (showForm) {
+    <section class="modal-backdrop">
+      <div class="modal">
+        <h3>{{ editMode ? 'Cập nhật dịch vụ' : 'Thêm dịch vụ mới' }}</h3>
+
+        <form (ngSubmit)="saveService()">
+          <label>
+            Tên dịch vụ
+            <input class="input" [(ngModel)]="form.name" name="name" required />
+          </label>
+
+          <label>
+            Loại dịch vụ
+            <input class="input" [(ngModel)]="form.type" name="type" required />
+          </label>
+
+          <label>
+            Giá
+            <input class="input" type="number" [(ngModel)]="form.price" name="price" required />
+          </label>
+
+          <label>
+            Nhãn bảo mật (OLS)
+            <select class="select" [(ngModel)]="form.securityLabel" name="label">
+              <option value="public">public</option>
+              <option value="confidential">confidential</option>
+              <option value="restricted">restricted</option>
+            </select>
+          </label>
+
+          <label>
+            Trạng thái
+            <select class="select" [(ngModel)]="form.active" name="active">
+              <option [ngValue]="true">Hoạt động</option>
+              <option [ngValue]="false">Tạm dừng</option>
+            </select>
+          </label>
+
+          <div class="form-actions">
+            <button class="btn" type="submit">Lưu</button>
+            <button class="btn" type="button" (click)="closeForm()">Hủy</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  }
+</main>
