@@ -29,16 +29,12 @@ public class UserAccount {
     @Column(name = "avatar", columnDefinition = " TEXT")
     private String avatar;
 
+    @Column(name = "phone", unique = true, length = 20)
+    private String phone;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
-    @ManyToOne
-    @JoinColumn(name = "garage_id")
-    private Garage garage;
-
-    @Column(name = "ols_label", length = 100)
-    private String olsLabel;
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;

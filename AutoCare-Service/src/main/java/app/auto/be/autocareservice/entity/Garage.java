@@ -28,7 +28,4 @@ public class Garage {
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;
-
-    @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL)
-    private List<Vehicle> vehicles = new ArrayList<>();
 }

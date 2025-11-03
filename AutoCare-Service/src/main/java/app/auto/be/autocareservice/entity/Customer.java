@@ -32,6 +32,9 @@ public class Customer {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private UserAccount userAccount;
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Vehicle> vehicles = new ArrayList<>();
 }

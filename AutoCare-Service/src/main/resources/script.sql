@@ -2,14 +2,14 @@
 -- 1. TẠO PROFILE BẢO MẬT
 -- ============================================================
 CREATE PROFILE secure_profile LIMIT
-  FAILED_LOGIN_ATTEMPTS 3
-  PASSWORD_LIFE_TIME 60
-  PASSWORD_REUSE_TIME 365
-  PASSWORD_REUSE_MAX 5
-  PASSWORD_LOCK_TIME 1/24         -- khóa 1 giờ nếu sai quá 3 lần
-  SESSIONS_PER_USER 3
-  IDLE_TIME 30
-  PASSWORD_VERIFY_FUNCTION ora12c_verify_function;
+    FAILED_LOGIN_ATTEMPTS 5             -- Cho phép sai tối đa 5 lần
+    PASSWORD_LIFE_TIME 180              -- Mật khẩu có hiệu lực 180 ngày (6 tháng)
+    PASSWORD_REUSE_TIME 30              -- Sau 30 ngày có thể dùng lại mật khẩu cũ
+    PASSWORD_REUSE_MAX 3                -- Hoặc sau khi đổi 3 lần
+    PASSWORD_LOCK_TIME 1/48             -- Khóa 30 phút nếu sai quá 5 lần
+    SESSIONS_PER_USER 5                 -- Cho phép mở 5 session cùng lúc
+    IDLE_TIME 120                       -- Cho phép rảnh 120 phút (2 tiếng) mới tự ngắt
+    PASSWORD_VERIFY_FUNCTION NULL;      -- Không kiểm tra độ phức tạp mật khẩu
 
 -- ============================================================
 -- 2. TẠO USER (SCHEMA) CHO ỨNG DỤNG
