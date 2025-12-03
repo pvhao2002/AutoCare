@@ -9,11 +9,52 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.OracleDialect
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        use_sql_comments: true
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 server:
   port: 6868
+  address: 0.0.0.0
   servlet:
     context-path: /api
+
+jwt:
+  secret: qD9JxK2r7M8zP4uT1bV6yL3cN9eH5wR2fG8aS0dX7
+  expiration: 864000000000
+  refresh:
+    expiration: 6048000000000
+
+logging:
+  level:
+    com:
+      health: INFO
+  file:
+    name: logs/autocare.log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    info:
+      enabled: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+  metrics:
+    tags:
+      application: autocare-backend-api
