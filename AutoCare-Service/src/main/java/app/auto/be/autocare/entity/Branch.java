@@ -1,8 +1,7 @@
 package app.auto.be.autocare.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,6 +11,9 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "branch")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +25,8 @@ public class Branch {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    
+    @Builder.Default
+    private boolean active = true;
 }
 

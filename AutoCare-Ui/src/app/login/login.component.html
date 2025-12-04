@@ -13,24 +13,27 @@
             <stop stop-color="#16b2a5"/>
             <stop offset="1" stop-color="#ffb34d"/>
           </linearGradient>
-          <linearGradient id="g2" x1="0" x2="48" y1="0" y2="48" gradientUnits="userSpaceOnUse">
+          <linearGradient id="g2" x1="0" x2="48" y1="0" y2="48">
             <stop stop-color="#eaf2ff"/>
             <stop offset="1" stop-color="#b8c4d9"/>
           </linearGradient>
         </defs>
       </svg>
       <div>
-        <h1>AutoCare Secure</h1>
+        <h1>AutoCare </h1>
         <p class="subtitle">Hệ thống quản lý & bảo dưỡng ô tô an toàn</p>
       </div>
     </div>
 
     <form class="login-form" (ngSubmit)="onLogin()">
+
+      <!-- Username -->
       <label>
         <span>Email hoặc tên đăng nhập</span>
         <input type="text" [(ngModel)]="username" name="username" required placeholder="you@autocare.vn"/>
       </label>
 
+      <!-- Password -->
       <label>
         <span>Mật khẩu</span>
         <div class="password">
@@ -39,28 +42,28 @@
           <button type="button" (click)="togglePwd()" aria-label="Hiện/ẩn mật khẩu">
             {{ showPwd ? '🙈' : '👁️' }}
           </button>
+          <div class="forgot-password">
+            <a href="javascript:void(0)" (click)="onForgotPwd()">Quên mật khẩu?</a>
+          </div>
         </div>
       </label>
 
-      <div class="remember-row">
-        <label>
-          <input type="checkbox" [(ngModel)]="remember" name="remember"/> Ghi nhớ tôi
-        </label>
-        <a routerLink="/forgot-password">Quên mật khẩu?</a>
-      </div>
+      <!-- ONLY keep the “Quên mật khẩu?” -->
 
+
+      <!-- Login button -->
       <button type="submit" class="btn-primary">Đăng nhập</button>
 
       <div class="divider">hoặc</div>
 
       <div class="alt-login">
         <button type="button" class="ghost" (click)="onQR()">Quét QR</button>
-        <button type="button" class="ghost" (click)="onSSO()">SSO</button>
+        <button type="button" class="ghost" routerLink="/register">Đăng ký</button>
       </div>
     </form>
 
     <p class="legal">
-      © 2025 AutoCare • Bảo mật Oracle VPD / OLS / FGA
+      © 2025 AutoCare
     </p>
   </section>
 </main>

@@ -1,9 +1,13 @@
 import {Routes} from '@angular/router';
 import {LayoutComponent} from "./layout/layout.component";
+import {profileResolver} from "./common/user.service";
+import {AuthGuard} from "./common/auth.guard";
 
 export const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
+    resolve: [profileResolver],
     component: LayoutComponent,
     children: [
       {
@@ -32,6 +36,10 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent)
   },
   {
     path: '**',

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import {Component} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {CONSTANT} from "../common/constant";
 
 @Component({
   selector: 'app-layout',
@@ -8,22 +9,17 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/rou
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
-export class LayoutComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
-    const token = localStorage.getItem('auth');
-    if (!token) {
-      this.router.navigate(['/login']).then();
-    }
+export class LayoutComponent {
+  constructor(private router: Router) {
   }
+
 
   onQuickAction(): void {
     this.router.navigate(['/services']).then();
   }
 
   onLogout(): void {
-    localStorage.removeItem('auth');
+    localStorage.removeItem(CONSTANT.authToken);
     sessionStorage.removeItem('authUser');
     this.router.navigate(['/login']).then();
   }

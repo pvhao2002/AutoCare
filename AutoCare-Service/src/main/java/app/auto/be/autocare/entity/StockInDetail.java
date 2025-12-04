@@ -2,6 +2,8 @@ package app.auto.be.autocare.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "stock_in_detail")
 public class StockInDetail {
@@ -18,6 +20,8 @@ public class StockInDetail {
     private Material material;
 
     private Integer quantity;
-    private Double price;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 }
 

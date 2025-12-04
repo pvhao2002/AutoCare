@@ -1,78 +1,87 @@
 :host {
-  --bg: #0b1220;
-  --glass: rgba(255, 255, 255, .05);
-  --stroke: rgba(255, 255, 255, .1);
-  --text: #f1f5f9;
+  --bg: #080e1a;
+  --glass: rgba(255, 255, 255, 0.06);
+  --stroke: rgba(255, 255, 255, 0.12);
+  --text: #f8fafc;
   --muted: #94a3b8;
   --primary: #16b2a5;
   --primary-dark: #0e877e;
-  --radius: 14px;
+  --radius: 16px;
+
   display: block;
   min-height: 100vh;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   color: var(--text);
 }
 
-/* Background gradient */
+/* ❤️ Background gradient nâng cấp */
 .login-bg {
   position: fixed;
   inset: 0;
-  background: radial-gradient(40vmax 40vmax at 80% 90%, rgba(22, 178, 165, .15), transparent 70%),
-  radial-gradient(35vmax 35vmax at 20% 10%, rgba(255, 179, 77, .1), transparent 70%),
-  linear-gradient(180deg, #0a101b, #0b1220);
+  background: radial-gradient(45vmax 45vmax at 80% 90%, rgba(22, 178, 165, 0.18), transparent 70%),
+  radial-gradient(45vmax 45vmax at 20% 10%, rgba(255, 179, 77, 0.15), transparent 70%),
+  linear-gradient(180deg, #070c14, #0b1220);
   z-index: -1;
 }
 
-/* Layout */
+/* Layout tổng */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 24px;
+  padding: 26px;
 }
 
+/* Card nâng cấp UI */
 .login-card {
-  width: min(100%, 420px);
+  width: min(100%, 450px);
   background: var(--glass);
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
-  backdrop-filter: blur(18px);
-  padding: 40px 32px;
-  box-shadow: 0 20px 40px #0007;
+  backdrop-filter: blur(22px);
+  padding: 42px 36px;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.6s ease forwards;
+
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
+/* Logo + brand */
 .login-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 6px;
+  gap: 16px;
+  margin-bottom: 4px;
+
+  h1 {
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 13px;
+  }
 }
 
 .brand-icon {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
 }
 
-.login-brand h1 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.subtitle {
-  color: var(--muted);
-  font-size: 14px;
-}
-
+/* Form */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 }
 
+/* Label cải thiện */
 label {
   display: flex;
   flex-direction: column;
@@ -81,77 +90,99 @@ label {
   color: var(--muted);
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
-  background: rgba(255, 255, 255, .08);
+/* Input đẹp, sang, bo góc mềm */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--stroke);
-  border-radius: var(--radius);
+  border-radius: 12px;
   color: var(--text);
   padding: 12px 14px;
   font-size: 15px;
   outline: none;
+  transition: all 0.15s ease;
 }
 
 input:focus {
   border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(22, 178, 165, 0.25);
 }
 
+/* Password field */
 .password {
   display: flex;
   align-items: center;
+
+  button {
+    margin-left: 8px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    color: var(--primary);
+  }
 }
 
-.password button {
-  margin-left: 8px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 16px;
-}
-
+/* Remember row */
 .remember-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   font-size: 13px;
   color: var(--muted);
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: 0.2s;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
 }
 
-.remember-row a {
-  color: var(--primary);
-  text-decoration: none;
-}
-
+/* Button chính */
 .btn-primary {
   background: linear-gradient(180deg, var(--primary), var(--primary-dark));
   border: 0;
-  border-radius: var(--radius);
+  border-radius: 12px;
   color: #042f2b;
   font-weight: 600;
   font-size: 15px;
   padding: 12px 16px;
   cursor: pointer;
-  transition: .15s filter;
+  transition: 0.15s ease;
+  letter-spacing: 0.2px;
 }
 
 .btn-primary:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.12);
 }
 
+/* Divider */
 .divider {
   text-align: center;
   color: var(--muted);
   font-size: 13px;
+  margin: 4px 0;
   position: relative;
 }
 
-.divider::before, .divider::after {
+.divider::before,
+.divider::after {
   content: "";
   position: absolute;
   top: 50%;
-  width: 40%;
+  width: 38%;
   height: 1px;
-  background: rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .divider::before {
@@ -162,24 +193,65 @@ input:focus {
   right: 0;
 }
 
+/* Alt login buttons */
 .alt-login {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+
+  .ghost {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    color: var(--text);
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+    backdrop-filter: blur(8px);
+  }
+
+  .ghost:hover {
+    border-color: var(--primary);
+    background: rgba(22, 178, 165, 0.1);
+    color: var(--primary);
+  }
 }
 
-.ghost {
-  flex: 1;
-  background: rgba(255, 255, 255, .05);
-  border: 1px dashed var(--stroke);
-  border-radius: 12px;
-  color: var(--text);
-  padding: 10px 0;
-  cursor: pointer;
-}
-
+/* Legal */
 .legal {
   text-align: center;
   font-size: 12px;
   color: var(--muted);
-  margin-top: 6px;
+  margin-top: 8px;
+}
+
+/* Animation mềm mại */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.forgot-password {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+
+  a {
+    color: var(--primary);
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity .2s ease;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
 }

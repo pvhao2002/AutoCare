@@ -29,9 +29,10 @@ public class JwtUtil {
     @Value("${jwt.refresh.expiration}")
     private Long refreshExpiration;
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, String sessionId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userDetails.getAuthorities().iterator().next().getAuthority());
+        claims.put("sessionId", sessionId);
         return createToken(claims, userDetails.getUsername(), expiration);
     }
 
@@ -56,6 +57,10 @@ public class JwtUtil {
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public String getSessionIdFromToken(String token) {
+        return getClaimFromToken(token, claims -> claims.get("sessionId", String.class));
     }
 
     public String getUsernameFromToken(String token) {

@@ -1,0 +1,56 @@
+@import "../login/login.component.scss";
+
+/* Nếu muốn tinh chỉnh riêng cho trang đăng ký,
+   bạn thêm CSS dưới đây */
+.register-container {
+  padding-top: 40px;
+}
+
+.register-card {
+  gap: 24px;
+}
+
+.register-form .error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin: 2px 0 0 4px;
+}
+
+.register-form select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--stroke);
+  color: var(--text);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.login-link {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 4px;
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin-top: -4px;
+}
+
+select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--stroke);
+  color: var(--text);
+  padding: 12px;
+  border-radius: var(--radius);
+}

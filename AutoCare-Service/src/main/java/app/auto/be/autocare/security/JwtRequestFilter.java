@@ -1,6 +1,7 @@
 package app.auto.be.autocare.security;
 
 
+import app.auto.be.autocare.repo.UserSessionRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
+    private final UserSessionRepository sessionRepository;
 
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_PREFIX = "Bearer ";
@@ -32,10 +35,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        if (shouldNotFilter(request)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
         final var requestTokenHeader = request.getHeader(AUTHORIZATION_HEADER);
         var username = "";
         var jwtToken = "";
@@ -51,17 +50,41 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             try {
-                var userDetails = userDetailsService.loadUserByUsername(username);
-                if (jwtUtil.validateToken(jwtToken, userDetails)) {
-                    UsernamePasswordAuthenticationToken authToken =
-                            new UsernamePasswordAuthenticationToken(
-                                    userDetails,
-                                    null,
-                                    userDetails.getAuthorities()
-                            );
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                // 1. Extract sessionId from token
+                String sessionId = jwtUtil.getSessionIdFromToken(jwtToken);
+                if (sessionId == null) {
+                    filterChain.doFilter(request, response);
+                    return;
                 }
+
+                // 2. Validate session from DB
+                var userSession = sessionRepository.findById(sessionId);
+                if (userSession.isEmpty() || !userSession.get().isActive()) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+
+                // Update lastActive
+                userSession.get().setLastActive(LocalDateTime.now());
+                sessionRepository.save(userSession.get());
+
+                // 3. Load user details
+                var userDetails = userDetailsService.loadUserByUsername(username);
+
+                // 4. Validate token
+                if (!jwtUtil.validateToken(jwtToken, userDetails)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities()
+                        );
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
             } catch (Exception e) {
                 log.error("Error setting authentication context: {}", e.getMessage());
             }
@@ -75,6 +98,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         var path = request.getRequestURI();
         return path.contains("/auth/")
                 || path.startsWith("/actuator/")
+                || path.startsWith("/api/branches")
                 || path.startsWith("/error")
                 ;
     }

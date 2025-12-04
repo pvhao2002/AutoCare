@@ -1,0 +1,14 @@
+<div class="toast-wrapper">
+  @for (t of toastService.toasts(); track $index) {
+    <div class="toast {{t.type}}">
+      <div class="icon">
+        @if (t.type === 'success') {
+          ✓
+        } @else {
+          ⚠
+        }
+      </div>
+      <div class="message">{{ t.message }}</div>
+    </div>
+  }
+</div>

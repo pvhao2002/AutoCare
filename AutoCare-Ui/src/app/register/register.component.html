@@ -1,0 +1,111 @@
+<div class="login-bg" aria-hidden="true"></div>
+
+<main class="login-container" role="main" aria-label="Đăng ký AutoCare">
+  <section class="login-card">
+
+    <!-- BRAND giống login -->
+    <div class="login-brand">
+      <svg class="brand-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4l14 6v8c0 10-6.8 18.9-14 22-7.2-3.1-14-12-14-22V10l14-6z"
+              stroke="url(#g1)" stroke-width="2.5"/>
+        <path d="M12 21h24M16 17h16M14 25h8m14 0h-8"
+              stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="g1" x1="0" x2="48" y1="0" y2="48">
+            <stop stop-color="#16b2a5"/>
+            <stop offset="1" stop-color="#ffb34d"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" x2="48" y1="0" y2="48">
+            <stop stop-color="#eaf2ff"/>
+            <stop offset="1" stop-color="#b8c4d9"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div>
+        <h1>Đăng ký tài khoản</h1>
+        <p class="subtitle">Tham gia hệ thống AutoCare</p>
+      </div>
+    </div>
+
+    <!-- FORM giống style login -->
+    <form class="login-form" (ngSubmit)="onRegister()" #f="ngForm">
+
+      <!-- USERNAME -->
+      <label>
+        <span>Tên đăng nhập</span>
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="model.username"
+          required
+          placeholder="username123"
+        />
+
+        @if (f.submitted && !model.username) {
+          <p class="error">Vui lòng nhập tên đăng nhập</p>
+        }
+      </label>
+
+      <!-- PASSWORD -->
+      <label>
+        <span>Mật khẩu</span>
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="model.password"
+          required minlength="6"
+          placeholder="•••••••"
+        />
+
+        @if (f.submitted && (!model.password || model.password.length < 6)) {
+          <p class="error">Mật khẩu phải từ 6 ký tự</p>
+        }
+      </label>
+
+      <!-- FULL NAME -->
+      <label>
+        <span>Họ và tên</span>
+        <input
+          type="text"
+          name="fullName"
+          [(ngModel)]="model.fullName"
+          required maxlength="50"
+          placeholder="Nguyễn Văn A"
+        />
+
+        @if (f.submitted && !model.fullName) {
+          <p class="error">Vui lòng nhập họ tên</p>
+        }
+      </label>
+
+      <!-- BRANCH -->
+      <label>
+        <span>Chi nhánh</span>
+        <select name="branchId" [(ngModel)]="model.branchId" required>
+          <option [value]="0">-- Chọn chi nhánh --</option>
+
+          @for (b of branches; track b.id) {
+            <option [value]="b.id">{{ b.branchName }}</option>
+          }
+        </select>
+
+        @if (f.submitted && !model.branchId) {
+          <p class="error">Vui lòng chọn chi nhánh</p>
+        }
+      </label>
+
+      <!-- SUBMIT -->
+      <button type="submit" class="btn-primary">Tạo tài khoản</button>
+
+      <!-- BACK TO LOGIN -->
+      <div class="alt-login">
+        <button type="button" class="ghost" routerLink="/login">Quay lại đăng nhập</button>
+      </div>
+    </form>
+
+    <p class="legal">
+      © 2025 AutoCare • Bảo mật Oracle VPD / OLS / FGA
+    </p>
+  </section>
+</main>

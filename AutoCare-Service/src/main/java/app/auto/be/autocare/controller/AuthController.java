@@ -4,6 +4,7 @@ package app.auto.be.autocare.controller;
 import app.auto.be.autocare.dto.LoginRequest;
 import app.auto.be.autocare.dto.RegisterRequest;
 import app.auto.be.autocare.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +34,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Object loginUser(@Valid @RequestBody LoginRequest request) {
+    public Object loginUser(
+            @Valid @RequestBody LoginRequest request
+            , HttpServletRequest httpRequest
+    ) {
         try {
-            return ResponseEntity.ok(authService.login(request));
+            return ResponseEntity.ok(authService.login(request, httpRequest));
         } catch (Exception e) {
             log.error("Login failed for email {}: {}", request.getUsername(), e.getMessage());
             throw e;

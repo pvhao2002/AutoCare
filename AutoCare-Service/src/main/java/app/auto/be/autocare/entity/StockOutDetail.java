@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
@@ -22,5 +24,7 @@ public class StockOutDetail {
     private Material material;
 
     private Integer quantity;
-    private Double price;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 }

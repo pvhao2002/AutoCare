@@ -1,9 +1,9 @@
 const PROXY_CONFIG = [
     {
         context: [
-            "/auto-service"
+            "/api"
         ],
-        target: "http://localhost:7878",
+        target: "http://localhost:6868",
         secure: false,
         changeOrigin: true,
         logLevel: "debug"
