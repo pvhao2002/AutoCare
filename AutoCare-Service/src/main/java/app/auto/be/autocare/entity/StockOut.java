@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,7 +16,7 @@ public class StockOut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String stockOutCode;
     @ManyToOne
     @JoinColumn(name = "created_by")
     private User createdBy;
@@ -24,7 +26,11 @@ public class StockOut {
     @OneToOne
     @JoinColumn(name = "signature_id")
     private DigitalSignature signature;
-
+    @ManyToOne
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
+    @OneToMany(mappedBy = "stockOut", cascade = CascadeType.ALL)
+    private Set<StockOutDetail> details = new HashSet<>();
     private String status;
 }
 

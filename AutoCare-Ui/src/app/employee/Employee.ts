@@ -10,6 +10,7 @@ export interface Employee {
 
 export interface Branch {
   id: number;
+  branchCode: string;
   branchName: string;
   address: string;
   createdAt: string;

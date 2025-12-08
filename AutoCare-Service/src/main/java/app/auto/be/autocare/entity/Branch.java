@@ -10,7 +10,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "branch")
+@Table(name = "branch",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "branch_code")
+        })
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -21,11 +24,14 @@ public class Branch {
     private String branchName;
     private String address;
 
+    @Column(name = "branch_code", length = 20)
+    private String branchCode;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-    
+
     @Builder.Default
     private boolean active = true;
 }

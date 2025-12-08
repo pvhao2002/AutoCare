@@ -85,7 +85,7 @@
         <select name="branchId" [(ngModel)]="model.branchId" required>
           <option [value]="0">-- Chọn chi nhánh --</option>
 
-          @for (b of branches; track b.id) {
+          @for (b of branches; track b) {
             <option [value]="b.id">{{ b.branchName }}</option>
           }
         </select>
@@ -105,7 +105,7 @@
     </form>
 
     <p class="legal">
-      © 2025 AutoCare • Bảo mật Oracle VPD / OLS / FGA
+      © 2025 AutoCare
     </p>
   </section>
 </main>

@@ -11,7 +11,8 @@ export class Branch {
     public address: string = '',
     public createdAt: string = '',
     public updatedAt: string = '',
-    public active: boolean = true
+    public active: boolean = true,
+    public branchCode: string = '',
   ) {
   }
 }

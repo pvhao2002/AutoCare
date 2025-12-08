@@ -19,8 +19,8 @@ import {AuthenticationService} from "../common/authentication.service";
 export class LoginComponent {
   username = '';
   password = '';
-  remember = false;
   showPwd = false;
+  showQR = false;
 
   constructor(protected readonly http: HttpClient,
               protected readonly router: Router,
