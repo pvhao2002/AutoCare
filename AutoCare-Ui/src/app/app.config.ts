@@ -7,6 +7,8 @@ import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi}
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {JwtInterceptor} from "./common/jwt-interceptor";
 import {ErrorInterceptor} from "./common/error-interceptor";
+import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
+import {provideTranslateService} from "@ngx-translate/core";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +20,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/assets/i18n/',
+        suffix: '.json'
+      }),
+      fallbackLang: 'vi_VN',
+      lang: 'vi_VN'
+    })
   ]
 };

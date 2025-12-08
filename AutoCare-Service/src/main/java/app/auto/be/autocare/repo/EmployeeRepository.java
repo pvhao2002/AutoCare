@@ -11,5 +11,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByPosition(String position);
 
-    List<Employee> findBySecurityClass(String securityClass);
+    List<Employee> findAllByActiveTrue();
 }

@@ -8,32 +8,33 @@
       </svg>
     </div>
     <div>
-      <div class="title">AutoCare Secure</div>
+      <div class="title">AutoCare</div>
       <small class="subtitle">Admin</small>
     </div>
   </div>
 
   <!-- ✅ Dùng routerLink -->
   <nav class="menu" aria-label="Main menu">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
-    <a routerLink="/services" routerLinkActive="active">Services</a>
-    <a routerLink="/customers" routerLinkActive="active">Customers</a>
-    <a routerLink="/invoices" routerLinkActive="active">Invoices</a>
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Trang chủ</a>
+    @for (m of menus; track m) {
+      <a routerLink="{{ m.link }}" routerLinkActive="active">{{ m.name }}</a>
+    }
   </nav>
 
   <div class="actions">
-    <span class="chip">Role: Admin</span>
-    <button class="btn" (click)="onQuickAction()">+ New Order</button>
+    <button class="btn" (click)="onQuickAction()">+ Đặt lịch</button>
+    <!-- ✅ Badge Chi nhánh -->
+    <span class="badge badge-branch">
+    🏢 {{ userService.profile.branch.branchName | translate }}
+  </span>
 
-    <div class="avatar" title="User menu">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="#93c5fd">
-        <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z"/>
-      </svg>
-    </div>
-
+    <!-- ✅ Badge Quyền -->
+    <span class="badge badge-role" [ngClass]="userService.profile.role">
+    👤 {{ userService.profile.role | translate }}
+  </span>
     <button class="btn" style="background:linear-gradient(180deg,#f43f5e,#b91c1c)"
             (click)="onLogout()">
-      Logout
+      Đăng xuất
     </button>
   </div>
 </header>

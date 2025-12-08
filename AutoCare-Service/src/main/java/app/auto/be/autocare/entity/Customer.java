@@ -17,10 +17,11 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameEnc;
-    private String phoneEnc;
-    private String emailEnc;
-    private String addressEnc;
+    private String name;
+    private String phone;
+    private String email;
+    private String address;
+    private boolean active;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

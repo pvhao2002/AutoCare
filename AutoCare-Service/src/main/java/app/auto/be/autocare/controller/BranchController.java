@@ -1,5 +1,6 @@
 package app.auto.be.autocare.controller;
 
+import app.auto.be.autocare.dto.ApiResponse;
 import app.auto.be.autocare.dto.StandardApiResponse;
 import app.auto.be.autocare.dto.branches.UpsertBranches;
 import app.auto.be.autocare.entity.Branch;
@@ -7,7 +8,6 @@ import app.auto.be.autocare.exception.ResourceNotFoundException;
 import app.auto.be.autocare.repo.BranchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,7 +20,7 @@ public class BranchController {
 
     @GetMapping
     public Object getBranches() {
-        return branchRepository.findAll();
+        return ApiResponse.success(branchRepository.findAll());
     }
 
     @PostMapping
@@ -35,7 +35,7 @@ public class BranchController {
         }, () -> {
             branchRepository.save(Branch.builder().branchName(branch.getName()).address(branch.getAddress()).build());
         });
-        return StandardApiResponse.success("Branch upserted successfully");
+        return ApiResponse.success("Branch upserted successfully");
     }
 
     @DeleteMapping("{id}")
@@ -50,6 +50,6 @@ public class BranchController {
                     throw new ResourceNotFoundException("Branch not found with id: " + id);
                 }
         );
-        return StandardApiResponse.success("Branch deleted successfully");
+        return ApiResponse.success("Branch deleted successfully");
     }
 }

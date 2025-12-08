@@ -5,11 +5,93 @@
   border-radius: 8px;
   transition: background 0.2s ease;
 }
+
 .menu a:hover {
-  background: rgba(255,255,255,.08);
+  background: rgba(255, 255, 255, .08);
 }
+
 .menu a.active {
-  background: linear-gradient(180deg,#16b2a5,#0e877e);
+  background: linear-gradient(180deg, #16b2a5, #0e877e);
   color: #082022;
   font-weight: 600;
+}
+
+/* === BADGE CHUNG === */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+}
+
+/* === BADGE CHI NHÁNH === */
+.badge-branch {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #e0e7ff;
+  border: 1px solid rgba(255, 255, 255, .15);
+}
+
+/* === BADGE QUYỀN === */
+.badge-role {
+  background: linear-gradient(135deg, #16a34a, #065f46);
+  color: #dcfce7;
+  border: 1px solid rgba(255, 255, 255, .15);
+}
+
+/* === NÚT LOGOUT RIÊNG === */
+.btn-logout {
+  background: linear-gradient(180deg, #f43f5e, #b91c1c);
+  color: white;
+  font-weight: 600;
+}
+
+/* === BADGE ROLE CHUNG === */
+.badge-role {
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, .25);
+}
+
+/* 🩶 ADMIN – BẠCH KIM (PLATINUM) */
+.badge-role.ADMIN {
+  background: linear-gradient(
+      135deg,
+      #f9fafb,   /* trắng ngà rất sáng */
+      #e5e7eb,   /* xám nhạt */
+      #c7d2fe    /* ánh xanh lạnh nhẹ (platinum feel) */
+  );
+  color: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.7),
+    0 0 14px rgba(199, 210, 254, 0.9); /* glow ánh xanh bạch kim */
+}
+
+
+/* 🥇 MANAGER – VÀNG (GOLD) */
+.badge-role.MANAGER {
+  background: linear-gradient(135deg, #facc15, #ca8a04);
+  color: #422006;
+  box-shadow: 0 0 12px rgba(250, 204, 21, .6);
+}
+
+/* 🥈 STAFF – BẠC (SILVER) */
+.badge-role.STAFF {
+  background: linear-gradient(135deg, #e5e7eb, #94a3b8);
+  color: #0f172a;
+  box-shadow: 0 0 12px rgba(148, 163, 184, .6);
+}
+
+/* 🥉 CUSTOMER – ĐỒNG (BRONZE) */
+.badge-role.CUSTOMER {
+  background: linear-gradient(135deg, #fb923c, #9a3412);
+  color: #fff7ed;
+  box-shadow: 0 0 12px rgba(251, 146, 60, .6);
 }

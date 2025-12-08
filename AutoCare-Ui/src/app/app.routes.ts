@@ -30,7 +30,23 @@ export const routes: Routes = [
       {
         path: 'invoices',
         loadComponent: () => import('./invoice/invoice.component').then(m => m.InvoiceComponent)
-      }
+      },
+      {
+        path: 'employees',
+        loadComponent: () => import('./employee/employee.component').then(m => m.EmployeeComponent)
+      },
+      {
+        path: 'branches',
+        loadComponent: () => import('./branch/branch.component').then(m => m.BranchComponent)
+      },
+      {
+        path: 'stock',
+        loadComponent: () => import('./stock/stock.component').then(m => m.StockComponent)
+      },
+      {
+        path: 'materials',
+        loadComponent: () => import('./material/material.component').then(m => m.MaterialComponent)
+      },
     ]
   },
   {

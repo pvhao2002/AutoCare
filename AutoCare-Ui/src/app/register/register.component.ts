@@ -51,8 +51,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<any>('api/branches').subscribe({
-      next: data => {
-        this.branches = data;
+      next: rs => {
+        this.branches = rs.data;
       }
     })
   }

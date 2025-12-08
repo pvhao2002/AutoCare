@@ -61,10 +61,6 @@ public class SecurityConfig {
                                 HttpMethod.GET,
                                 "/branches/**"
                         ).permitAll()
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                "/branches/**"
-                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
