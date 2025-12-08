@@ -1,0 +1,97 @@
+<main class="wrap">
+  <section class="grid">
+    <div class="card" style="grid-column:1 / -1;">
+      <h2>Quản lý nhân viên</h2>
+      <p class="muted">
+        Theo dõi, thêm mới và chỉnh sửa thông tin nhân viên.
+      </p>
+
+      <div class="toolbar">
+        <button class="btn" (click)="openCreateForm()">+ Thêm nhân viên</button>
+        <input type="text" class="input" placeholder="Tìm kiếm nhân viên..."
+               [(ngModel)]="searchTerm" (input)="filter()"/>
+      </div>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Họ tên</th>
+          <th>Chức vụ</th>
+          <th>Lương</th>
+          <th>Chi nhánh</th>
+          <th>Ngày tạo</th>
+          <th>Ngày cập nhật</th>
+          <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (c of filterData; track c.id; let i = $index) {
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{ c.fullName }}</td>
+              <td>{{ c.position }}</td>
+              <td>{{ c.salary }}</td>
+              <td>{{ c.branch.branchName }}</td>
+              <td>{{ c.createdAt }}</td>
+              <td>{{ c.updatedAt }}</td>
+              <td>
+                <button class="btn small" (click)="edit(c)">Sửa</button>
+                <button class="btn small danger" (click)="deleteEmployee(c)">Xóa</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="99" style="text-align:center; padding:20px; color:#666;">
+                Không tìm thấy khách hàng nào.
+              </td>
+            </tr>
+          }
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="99">
+            <div class="table-footer">
+              <span class="count">
+                Tổng số khách hàng:
+                <strong>{{ filterData.length }}</strong>
+              </span>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </section>
+
+  @if (showForm) {
+    <section class="modal-backdrop">
+      <div class="modal">
+        <h3>{{ editMode ? 'Cập nhật khách hàng' : 'Thêm khách hàng mới' }}</h3>
+        <form (ngSubmit)="saveEmployee()">
+          <label>Họ và tên <input class="input" [(ngModel)]="form.fullName" name="name" required/></label>
+          <label>Chức vụ <input class="input" [(ngModel)]="form.position" name="position" required/></label>
+          <label>Lương <input class="input" [(ngModel)]="form.salary" name="salary" required/></label>
+          <label>
+            Chi nhánh
+            <select class="input" [(ngModel)]="form.branchId" name="branchId" required>
+              <option value="" disabled selected>-- Chọn chi nhánh --</option>
+              @for (branch of branches; track branch) {
+                <option [value]="branch.id">
+                  {{ branch.branchName }}
+                </option>
+              }
+
+            </select>
+          </label>
+
+          <div class="form-actions">
+            <button class="btn" type="submit">Lưu</button>
+            <button class="btn" type="button" (click)="closeForm()">Hủy</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  }
+</main>
