@@ -40,8 +40,8 @@
               <td>{{ c.branchCode }}</td>
               <td>{{ c.branchName }}</td>
               <td>{{ c.address }}</td>
-              <td>{{ c.createdAt | date : 'dd-MM-yyy h:mm:ss a' }}</td>
-              <td>{{ c.updatedAt | date : 'dd-MM-yyy h:mm:ss a' }}</td>
+              <td>{{ c.createdAt | date : 'dd-MM-yyy H:mm' }}</td>
+              <td>{{ c.updatedAt | date : 'dd-MM-yyy H:mm' }}</td>
               <td>
                 <button class="btn small" (click)="edit(c)">Sửa</button>
                 <button class="btn small danger" (click)="deleteBranch(c)">Xóa</button>

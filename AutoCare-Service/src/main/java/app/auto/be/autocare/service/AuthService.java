@@ -44,6 +44,10 @@ public class AuthService {
             throw new ValidationException("Username is already registered");
         }
 
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new ValidationException("Email is already registered");
+        }
+
         var branch = branchRepository.findById(request.getBranchId())
                 .orElseThrow(() -> new ValidationException("Branch not found"));
 
@@ -52,8 +56,10 @@ public class AuthService {
                 .username(request.getUsername().toLowerCase())
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .fullName(request.getFullName())
+                .email(request.getEmail())
                 .role(RoleName.STAFF)
                 .branch(branch)
+                .needCreateProfile(true)
                 .active(true)
                 .build();
         var savedUser = userRepository.save(user);

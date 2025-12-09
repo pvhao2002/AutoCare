@@ -1,0 +1,11 @@
+/* PAGE BOOKING */
+:host {
+  display: block;
+}
+
+/* RESPONSIVE CHO BOOKING */
+@media (max-width: 900px) {
+  .card[style*="span 6"] {
+    grid-column: 1 / -1 !important;
+  }
+}

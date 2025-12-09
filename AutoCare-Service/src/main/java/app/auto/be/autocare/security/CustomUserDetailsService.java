@@ -18,12 +18,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userRepository.findByUsername(username)
+        var user = userRepository.findByUsernameOrEmail(username, username)
                 .orElseThrow(() -> {
                     log.warn("User not found with email: {}", username);
-                    return new UsernameNotFoundException("User not found with email: " + username);
+                    return new UsernameNotFoundException("User not found with username/email: " + username);
                 });
-        if (!user.isActive()) {
+        if (!user.getActive()) {
             log.warn("User account is inactive: {}", username);
             throw new UsernameNotFoundException("User account is inactive: " + username);
         }

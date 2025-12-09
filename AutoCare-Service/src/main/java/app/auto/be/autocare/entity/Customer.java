@@ -17,15 +17,19 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(nullable = false, unique = true)
     private String phone;
-    private String email;
     private String address;
     private boolean active;
 
+    private String updatedBy;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @OneToOne
+    @JoinColumn(name = "app_user_id", unique = true)
+    private User user;
 }
 

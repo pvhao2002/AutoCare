@@ -47,6 +47,22 @@
         }
       </label>
 
+      <!-- EMAIL -->
+      <label>
+        <span>Email</span>
+        <input
+          type="text"
+          name="email"
+          [(ngModel)]="model.email"
+          required
+          placeholder="abc@gmail.com"
+        />
+
+        @if (f.submitted && !model.email) {
+          <p class="error">Vui lòng nhập email</p>
+        }
+      </label>
+
       <!-- PASSWORD -->
       <label>
         <span>Mật khẩu</span>

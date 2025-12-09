@@ -20,11 +20,13 @@ export class RegisterComponent implements OnInit {
     password: string;
     fullName: string;
     branchId: number;
+    email: string;
   } = {
     username: '',
     password: '',
     fullName: '',
-    branchId: 0
+    branchId: 0,
+    email: ''
   };
 
   constructor(protected readonly http: HttpClient

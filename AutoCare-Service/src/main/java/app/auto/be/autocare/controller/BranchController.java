@@ -3,7 +3,6 @@ package app.auto.be.autocare.controller;
 import app.auto.be.autocare.dto.ApiResponse;
 import app.auto.be.autocare.dto.branches.UpsertBranches;
 import app.auto.be.autocare.entity.Branch;
-import app.auto.be.autocare.exception.ResourceNotFoundException;
 import app.auto.be.autocare.repo.BranchRepository;
 import app.auto.be.autocare.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class BranchController {
 
     @GetMapping
     public Object getBranches() {
-        return ApiResponse.success(branchRepository.findAll());
+        return ApiResponse.success(branchRepository.findAllByActiveTrue());
     }
 
     @PostMapping
@@ -50,7 +49,7 @@ public class BranchController {
                     branchRepository.save(branch);
                 },
                 () -> {
-                    throw new ResourceNotFoundException("Branch not found with id: " + id);
+                    throw new IllegalArgumentException("Branch not found with id: " + id);
                 }
         );
         return ApiResponse.success("Branch deleted successfully");

@@ -1,0 +1,81 @@
+/* GRID 2 CỘT TRÊN DESKTOP */
+.profile-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* MỖI SECTION RIÊNG */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(180deg, #0b1220, #0b0f1a);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-1);
+}
+
+/* TIÊU ĐỀ CÁC KHU */
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.warn-text {
+  color: var(--warn);
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+/* FORM PROFILE */
+.profile-form {
+  margin-top: 10px;
+}
+
+/* PASSWORD SECTION RIÊNG */
+.password-section {
+  background: linear-gradient(180deg, #1a0e12, #0b0f1a);
+  border-color: #3f1d22;
+}
+
+/* HISTORY RIÊNG */
+.history-section {
+  grid-column: 1 / -1; /* chiếm full hàng */
+  background: linear-gradient(180deg, #0b1a25, #0b1220);
+  border-color: #0d2b46;
+}
+
+/* BUTTON WARNING */
+.btn-warning {
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .history-section {
+    grid-column: auto;
+  }
+}
+
+/* LOGOUT ALL DEVICES */
+.logout-section {
+  grid-column: 1 / -1;
+  background: linear-gradient(180deg, #2a0e15, #0b0f1a);
+  border: 1px solid #5b1b1b;
+}
+
+.danger-text {
+  color: var(--danger);
+}
+
+.btn-danger {
+  background: linear-gradient(180deg, #ff6b6b, #dc2626);
+  box-shadow: 0 6px 18px rgba(255, 107, 107, 0.45);
+}

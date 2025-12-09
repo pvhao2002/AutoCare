@@ -16,6 +16,12 @@ spring:
         format_sql: true
         use_sql_comments: true
     open-in-view: false
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always                # ✅ LUÔN CHẠY KHI START APP
+      continue-on-error: true    # ✅ KHÔNG DIE KHI TRÙNG DỮ LIỆU
+      platform: oracle
   servlet:
     multipart:
       max-file-size: 10MB

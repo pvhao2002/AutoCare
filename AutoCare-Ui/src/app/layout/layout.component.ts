@@ -29,6 +29,7 @@ export class LayoutComponent implements OnInit {
     {name: 'Khách hàng', link: '/customers', allowRole: [this.ADMIN_ROLE, this.MANAGER_ROLE, this.STAFF_ROLE]},
     {name: 'Vật tư', link: '/materials', allowRole: [this.ADMIN_ROLE, this.MANAGER_ROLE, this.STAFF_ROLE]},
     {name: 'Kho', link: '/stock', allowRole: [this.ADMIN_ROLE, this.MANAGER_ROLE, this.STAFF_ROLE]},
+    {name: 'Trang cá nhân', link: '/profile', allowRole: [this.MANAGER_ROLE, this.STAFF_ROLE]},
   ];
 
   constructor(protected readonly router: Router,
@@ -37,7 +38,7 @@ export class LayoutComponent implements OnInit {
   }
 
   onQuickAction(): void {
-    this.router.navigate(['/services']).then();
+    this.router.navigate(['/booking']).then();
   }
 
   onLogout(): void {

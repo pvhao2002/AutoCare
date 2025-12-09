@@ -25,15 +25,11 @@ public class CustomerController {
         Optional.ofNullable(customer.getId())
                 .flatMap(customerRepository::findById)
                 .ifPresentOrElse(existingCustomer -> {
-                    existingCustomer.setName(customer.getName());
-                    existingCustomer.setEmail(customer.getEmail());
                     existingCustomer.setPhone(customer.getPhone());
                     existingCustomer.setAddress(customer.getAddress());
                     customerRepository.save(existingCustomer);
                 }, () -> {
                     var newCustomer = new Customer();
-                    newCustomer.setName(customer.getName());
-                    newCustomer.setEmail(customer.getEmail());
                     newCustomer.setPhone(customer.getPhone());
                     newCustomer.setAddress(customer.getAddress());
                     newCustomer.setActive(true);

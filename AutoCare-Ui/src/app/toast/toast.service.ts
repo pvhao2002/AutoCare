@@ -13,6 +13,14 @@ export class ToastService {
     }, 3000);
   }
 
+  close(toast: { type: string; message: string }) {
+    this.toasts.update(list => list.filter(t => t !== toast));
+  }
+
+  remove(index: number) {
+    this.toasts.update(list => list.filter((_, idx) => idx !== index));
+  }
+
   success(message: string) {
     this.show(message, 'success');
   }

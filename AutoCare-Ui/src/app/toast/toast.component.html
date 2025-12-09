@@ -1,6 +1,6 @@
 <div class="toast-wrapper">
   @for (t of toastService.toasts(); track $index) {
-    <div class="toast {{t.type}}">
+    <div class="toast {{t.type}}" (click)="toastService.remove($index)">
       <div class="icon">
         @if (t.type === 'success') {
           ✓

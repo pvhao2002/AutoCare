@@ -29,7 +29,7 @@ public class UserPrincipal implements UserDetails {
                 user.getPasswordHash(),
                 user.getFullName(),
                 user.getRole(),
-                user.isActive()
+                user.getActive()
         );
     }
 

@@ -16,7 +16,6 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String fullName;
     @ManyToOne
     @JoinColumn(name = "branch_id")
     private Branch branch;
@@ -27,5 +26,9 @@ public class Employee {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
     private boolean active;
+    private String updatedBy;
+    @OneToOne
+    @JoinColumn(name = "app_user_id", unique = true)
+    private User user;
 }
 

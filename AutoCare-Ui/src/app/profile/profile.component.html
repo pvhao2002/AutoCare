@@ -1,0 +1,121 @@
+<div class="wrap">
+  <div class="grid profile-grid">
+
+    <!-- ========== 1. THÔNG TIN CÁ NHÂN ========== -->
+    <div class="card profile-section">
+      <h3 class="section-title">Thông tin cá nhân</h3>
+
+      <form class="form profile-form">
+        <div class="field">
+          <label>Họ và tên</label>
+          <input class="input" type="text" name="fullName" placeholder="Nguyễn Văn A">
+        </div>
+
+        <div class="field">
+          <label>Chức vụ</label>
+          <input class="input" type="text" placeholder="STAFF / MANAGER">
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input class="input" type="email" placeholder="email@gmail.com">
+        </div>
+
+        <div class="field">
+          <label>Chi nhánh</label>
+          <input class="input" type="text" disabled value="Trụ sở chính">
+        </div>
+
+        <div class="field">
+          <label>Lương</label>
+          <input class="input" type="text" disabled value="15,000,000 VND">
+        </div>
+
+        <div class="field">
+          <label>Trạng thái</label>
+          <span class="status ok"><span>Đang hoạt động</span></span>
+        </div>
+      </form>
+
+      <div class="toolbar">
+        <button class="btn">Lưu thông tin</button>
+      </div>
+    </div>
+
+    <!-- ========== 2. ĐỔI MẬT KHẨU ========== -->
+    <div class="card profile-section password-section">
+      <h3 class="section-title warn-text">Đổi mật khẩu</h3>
+
+      <div class="form">
+        <div class="field">
+          <label>Mật khẩu hiện tại</label>
+          <input class="input" type="password">
+        </div>
+
+        <div class="field">
+          <label>Mật khẩu mới</label>
+          <input class="input" type="password">
+        </div>
+
+        <div class="field">
+          <label>Nhập lại mật khẩu mới</label>
+          <input class="input" type="password">
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button class="btn btn-warning">Cập nhật mật khẩu</button>
+      </div>
+    </div>
+
+    <!-- ========== 3. LỊCH SỬ THAY ĐỔI ========== -->
+    <div class="card profile-section history-section">
+      <h3 class="section-title accent-text">Lịch sử thay đổi</h3>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Thời gian</th>
+          <th>Hành động</th>
+          <th>Người thực hiện</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>09/12/2025</td>
+          <td>Đổi mật khẩu</td>
+          <td>admin</td>
+        </tr>
+        <tr>
+          <td>01/12/2025</td>
+          <td>Cập nhật email</td>
+          <td>admin</td>
+        </tr>
+        <tr>
+          <td>20/11/2025</td>
+          <td>Thay đổi số điện thoại</td>
+          <td>admin</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ========== 4. ĐĂNG XUẤT TẤT CẢ THIẾT BỊ ========== -->
+    <div class="card profile-section logout-section">
+      <h3 class="section-title danger-text">Đăng xuất tất cả thiết bị</h3>
+
+      <p class="muted">
+        Thao tác này sẽ đăng xuất tài khoản của bạn trên toàn bộ thiết bị đã đăng nhập trước đó
+        (trình duyệt, điện thoại, máy khác).
+      </p>
+
+      <div class="toolbar">
+        <button class="btn btn-danger">
+          Đăng xuất toàn bộ thiết bị
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -98,7 +98,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         var path = request.getRequestURI();
         return path.contains("/auth/")
                 || path.startsWith("/actuator/")
-                || path.startsWith("/api/branches")
                 || path.startsWith("/error")
                 ;
     }

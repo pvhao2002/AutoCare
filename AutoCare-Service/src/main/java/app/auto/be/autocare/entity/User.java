@@ -28,15 +28,19 @@ public class User {
     @Column(nullable = false, length = 100)
     private String fullName;
 
+    @Column(length = 100, unique = true, nullable = false)
+    private String email;
+
     @ManyToOne
     @JoinColumn(name = "branch_id")
     private Branch branch;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoleName role; // ADMIN, HR, MANAGER, STAFF
+    private RoleName role; // ADMIN, MANAGER, STAFF
 
-    private boolean active;
+    private Boolean active;
+    private Boolean needCreateProfile;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
