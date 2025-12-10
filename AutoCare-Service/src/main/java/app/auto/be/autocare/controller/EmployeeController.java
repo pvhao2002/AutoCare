@@ -2,7 +2,6 @@ package app.auto.be.autocare.controller;
 
 import app.auto.be.autocare.dto.ApiResponse;
 import app.auto.be.autocare.dto.employee.EmployeeDTO;
-import app.auto.be.autocare.repo.EmployeeRepository;
 import app.auto.be.autocare.security.UserPrincipal;
 import app.auto.be.autocare.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("employee")
 @RequiredArgsConstructor
 public class EmployeeController {
-    private final EmployeeRepository employeeRepository;
     private final EmployeeService employeeService;
 
     @GetMapping
     public Object getAllEmployees() {
-        return ApiResponse.success(employeeRepository.findAllByActiveTrue());
+        return ApiResponse.success(employeeService.findAllEmployees());
     }
 
     @PostMapping
@@ -34,16 +32,8 @@ public class EmployeeController {
     }
 
     @DeleteMapping("{id}")
-    public Object deleteEmployee(@PathVariable Long id) {
-        employeeRepository.findById(id).ifPresentOrElse(
-                (employee) -> {
-                    employee.setActive(false);
-                    employeeRepository.save(employee);
-                },
-                () -> {
-                    throw new IllegalArgumentException("Employee not found with id: " + id);
-                }
-        );
+    public Object deleteEmployee(@PathVariable Long id, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        employeeService.deactivateEmployee(id, userPrincipal);
         return ApiResponse.success("Employee deleted successfully");
     }
 }

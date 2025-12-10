@@ -37,9 +37,8 @@ public class AuthService {
     private final BranchRepository branchRepository;
     private final SessionService sessionService;
 
-
     @Transactional
-    public AuthResponse register(RegisterRequest request) {
+    public User register(RegisterRequest request, RoleName role) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new ValidationException("Username is already registered");
         }
@@ -57,12 +56,17 @@ public class AuthService {
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .fullName(request.getFullName())
                 .email(request.getEmail())
-                .role(RoleName.STAFF)
+                .role(role)
                 .branch(branch)
                 .needCreateProfile(true)
                 .active(true)
                 .build();
-        var savedUser = userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public AuthResponse register(RegisterRequest request) {
+        var savedUser = register(request, RoleName.STAFF);
 
         return AuthResponse.builder()
                 .id(savedUser.getId())

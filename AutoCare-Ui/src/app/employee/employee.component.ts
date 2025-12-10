@@ -3,9 +3,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {ToastService} from "../toast/toast.service";
 import {ConfirmService} from "../modal/confirm.service";
-import {Observable} from "rxjs";
+import {forkJoin, Observable} from "rxjs";
 import {switchMap, tap} from "rxjs/operators";
-import {Branch, Employee} from "./Employee";
+import {Employee, EmployeeUser} from "./Employee";
+import {CommonFilterService} from "../common/common-filter.service";
+import {Branch} from "../common/user.service";
+import {TranslatePipe} from "@ngx-translate/core";
+import {NgClass} from "@angular/common";
 
 
 @Component({
@@ -13,12 +17,14 @@ import {Branch, Employee} from "./Employee";
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslatePipe,
+    NgClass,
   ],
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss', '../../styles/common-table.scss']
+  styleUrls: ['../../styles/common-table.scss', './employee.component.scss'],
 })
-export class EmployeeComponent implements OnInit{
+export class EmployeeComponent implements OnInit {
   data: Employee[] = [];
   filterData: Employee[] = [];
   searchTerm = '';
@@ -27,13 +33,14 @@ export class EmployeeComponent implements OnInit{
   // modal form
   showForm = false;
   editMode = false;
-  form: Partial<Employee> & { branchId?: number } = {};
+  form: Partial<Employee> & Partial<EmployeeUser> & { branchId?: number; } = {};
   editing?: Employee;
 
   constructor(
     protected readonly http: HttpClient,
     protected readonly toast: ToastService,
     protected readonly confirm: ConfirmService,
+    protected readonly filterService: CommonFilterService,
   ) {
   }
 
@@ -44,7 +51,14 @@ export class EmployeeComponent implements OnInit{
   }
 
   edit(c: Employee) {
-    this.form = {...c};
+    this.form = {
+      ...c,
+      branchId: c.branch.id,
+      username: c.user.username,
+      fullName: c.user.fullName,
+      email: c.user.email,
+      role: c.user.role,
+    };
     this.editing = c;
     this.editMode = true;
     this.showForm = true;
@@ -55,6 +69,13 @@ export class EmployeeComponent implements OnInit{
       .pipe(tap((res: any) => {
         this.data = res.data;
         this.filterData = [...this.data];
+      }));
+  }
+
+  loadBranch(): Observable<Branch[]> {
+    return this.http.get<any>('api/branches')
+      .pipe(tap((res: any) => {
+        this.branches = res.data;
       }));
   }
 
@@ -69,7 +90,7 @@ export class EmployeeComponent implements OnInit{
       .pipe(
         tap(() => {
           const message = isEdit
-            ? `Cập nhật nhân viên ${formValue.fullName} thành công!`
+            ? `Cập nhật nhân viên ${formValue.user.fullName} thành công!`
             : 'Thêm nhân viên thành công!';
           if (isEdit) {
             this.toast.show(message, 'success');
@@ -93,7 +114,7 @@ export class EmployeeComponent implements OnInit{
   deleteEmployee(c: Employee) {
     this.confirm.open({
       title: 'Xác nhận xoá nhân viên',
-      message: `Bạn có chắc chắn muốn xoá nhân viên "${c.fullName}" không?`,
+      message: `Bạn có chắc chắn muốn xoá nhân viên "${c.user.fullName}" không?`,
       confirmText: 'Xoá',
       cancelText: 'Huỷ'
     }).subscribe(confirmed => {
@@ -118,14 +139,13 @@ export class EmployeeComponent implements OnInit{
 
   filter(): void {
     const term = this.searchTerm.toLowerCase();
-    this.filterData = this.data.filter(c =>
-      c.fullName.toLowerCase().includes(term) ||
-      c.branch.branchName.includes(term) ||
-      c.position.toLowerCase().includes(term)
-    );
+    this.filterData = this.filterService.filter(this.data, term, ['user.fullName', 'user.username', 'position', 'branch.branchName']);
   }
 
   ngOnInit(): void {
-    this.loadEmployee().subscribe();
+    forkJoin([
+      this.loadEmployee(),
+      this.loadBranch()
+    ]).subscribe();
   }
 }

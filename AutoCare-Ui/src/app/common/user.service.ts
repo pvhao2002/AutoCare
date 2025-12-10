@@ -24,7 +24,8 @@ export class UserInfo {
     public fullName: string = '',
     public role: string = '',
     public active: boolean = true,
-    public branch: Branch = new Branch()
+    public branch: Branch = new Branch(),
+    public needCreateProfile: boolean = false,
   ) {
   }
 }
@@ -68,7 +69,8 @@ export class UserService {
               res.branch?.createdAt,
               res.branch?.updatedAt,
               res.branch?.active,
-            )
+            ),
+            res.needCreateProfile
           );
           this.setProfile(profile);
           subscriber.next(res);
@@ -89,3 +91,4 @@ export class UserService {
 export const profileResolver: ResolveFn<Observable<UserInfo>> = () => {
   return inject(UserService).getProfileData();
 };
+

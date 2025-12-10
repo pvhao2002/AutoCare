@@ -2,6 +2,7 @@ package app.auto.be.autocare.repo;
 
 import app.auto.be.autocare.entity.RoleName;
 import app.auto.be.autocare.entity.User;
+import app.auto.be.autocare.entity.projection.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -18,5 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByRole(RoleName role);
 
     List<User> findByBranchId(Long branchId);
+
+    List<UserInfo> findAllByActiveTrue();
 }
 

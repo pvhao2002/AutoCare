@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Branch, Employee} from "../employee/Employee";
 import {HttpClient} from "@angular/common/http";
 import {ToastService} from "../toast/toast.service";
 import {ConfirmService} from "../modal/confirm.service";
@@ -7,6 +6,8 @@ import {Observable} from "rxjs";
 import {switchMap, tap} from "rxjs/operators";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {CommonFilterService} from "../common/common-filter.service";
+import {Branch} from "../common/user.service";
 
 @Component({
   selector: 'app-branch',
@@ -34,6 +35,7 @@ export class BranchComponent implements OnInit {
     protected readonly http: HttpClient,
     protected readonly toast: ToastService,
     protected readonly confirm: ConfirmService,
+    protected readonly filterService: CommonFilterService,
   ) {
   }
 
@@ -71,11 +73,7 @@ export class BranchComponent implements OnInit {
           const message = isEdit
             ? `Cập nhật chi nhánh ${formValue.branchName} thành công!`
             : 'Thêm chi nhánh thành công!';
-          if (isEdit) {
-            this.toast.show(message, 'success');
-          } else {
-            this.toast.show(message, 'success');
-          }
+          this.toast.show(message, 'success');
         }),
         switchMap(() => this.loadBranch())
       )
@@ -117,10 +115,10 @@ export class BranchComponent implements OnInit {
   }
 
   filter(): void {
-    const term = this.searchTerm.toLowerCase();
-    this.filterData = this.data.filter(c =>
-      c.branchName?.toLowerCase().includes(term) ||
-      c.address?.toLowerCase().includes(term)
+    this.filterData = this.filterService.filter(
+      this.data,
+      this.searchTerm,
+      ['branchName', 'address']
     );
   }
 

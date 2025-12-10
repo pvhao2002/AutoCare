@@ -1,18 +1,31 @@
+// employee.model.ts
 export interface Employee {
   id: number;
-  fullName: string;
-  position: string;
+  branch: EmployeeBranch;
+  age: number;
+  address: string;
+  phone: string;
+  gender: string;
   salary: number;
-  branch: Branch;
   createdAt: string;
   updatedAt: string;
+  updatedBy: string;
+  user: EmployeeUser;
 }
 
-export interface Branch {
+// ✅ Map đúng RawEmployeeBranch
+export interface EmployeeBranch {
   id: number;
-  branchCode: string;
   branchName: string;
-  address: string;
-  createdAt: string;
-  updatedAt: string;
+  branchCode: string;
+}
+
+// ✅ Map đúng RawEmployeeUser
+export interface EmployeeUser {
+  id: number;
+  username: string;
+  fullName: string;
+  email: string;
+  role: string; // hoặc enum RoleName nếu bạn có
+  password?: string; // optional nếu không luôn có
 }

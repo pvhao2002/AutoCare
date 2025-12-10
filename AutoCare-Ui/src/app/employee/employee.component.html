@@ -16,12 +16,18 @@
         <thead>
         <tr>
           <th>#</th>
+          <th>Tài khoản</th>
           <th>Họ tên</th>
-          <th>Chức vụ</th>
-          <th>Lương</th>
           <th>Chi nhánh</th>
+          <th>Chức vụ</th>
+          <th>Giới tính</th>
+          <th>Tuổi</th>
+          <th>Địa chỉ</th>
+          <th>SDT</th>
+          <th>Lương</th>
           <th>Ngày tạo</th>
-          <th>Ngày cập nhật</th>
+          <th>Cập nhật</th>
+          <th>Người sửa</th>
           <th>Thao tác</th>
         </tr>
         </thead>
@@ -29,12 +35,18 @@
           @for (c of filterData; track c.id; let i = $index) {
             <tr>
               <td>{{ i + 1 }}</td>
-              <td>{{ c.fullName }}</td>
-              <td>{{ c.position }}</td>
-              <td>{{ c.salary }}</td>
+              <td>{{ c.user.username }}</td>
+              <td>{{ c.user.fullName }}</td>
               <td>{{ c.branch.branchName }}</td>
+              <td>{{ c.user.role | translate }}</td>
+              <td>{{ c.gender }}</td>
+              <td>{{ c.age }}</td>
+              <td>{{ c.address }}</td>
+              <td>{{ c.phone }}</td>
+              <td>{{ c.salary }}</td>
               <td>{{ c.createdAt }}</td>
               <td>{{ c.updatedAt }}</td>
+              <td>{{ c.updatedBy }}</td>
               <td>
                 <button class="btn small" (click)="edit(c)">Sửa</button>
                 <button class="btn small danger" (click)="deleteEmployee(c)">Xóa</button>
@@ -43,7 +55,7 @@
           } @empty {
             <tr>
               <td colspan="99" style="text-align:center; padding:20px; color:#666;">
-                Không tìm thấy khách hàng nào.
+                Không tìm thấy nhân viên nào.
               </td>
             </tr>
           }
@@ -53,7 +65,7 @@
           <td colspan="99">
             <div class="table-footer">
               <span class="count">
-                Tổng số khách hàng:
+                Tổng số nhân viên:
                 <strong>{{ filterData.length }}</strong>
               </span>
             </div>
@@ -66,14 +78,56 @@
   </section>
 
   @if (showForm) {
-    <section class="modal-backdrop">
+    <section class="modal-backdrop employee-modal">
       <div class="modal">
-        <h3>{{ editMode ? 'Cập nhật khách hàng' : 'Thêm khách hàng mới' }}</h3>
-        <form (ngSubmit)="saveEmployee()">
-          <label>Họ và tên <input class="input" [(ngModel)]="form.fullName" name="name" required/></label>
-          <label>Chức vụ <input class="input" [(ngModel)]="form.position" name="position" required/></label>
-          <label>Lương <input class="input" [(ngModel)]="form.salary" name="salary" required/></label>
-          <label>
+        <h3>{{ editMode ? 'Cập nhật nhân viên' : 'Thêm nhân viên mới' }}</h3>
+        <form (ngSubmit)="saveEmployee()" #employeeForm="ngForm" class="form">
+          @if (!editMode) {
+            <label class="col-3">Tên đăng nhập <input type="text" class="input" name="username"
+                                                      [(ngModel)]="form.username" required
+                                                      autocomplete="off"/>
+            </label>
+            <label class="col-3">Email <input type="text" class="input" name="email" [(ngModel)]="form.email" required
+                                              autocomplete="off"/>
+            </label>
+
+            <label class="col-3">Họ và tên <input type="text" class="input" name="fullName" [(ngModel)]="form.fullName"
+                                                  required
+                                                  autocomplete="off"/>
+            </label>
+            <label class="col-3">Mật khẩu <input type="text" class="input" name="password" [(ngModel)]="form.password"
+                                                 required
+                                                 autocomplete="off"/>
+            </label>
+          } @else {
+            <label class="col-3">Họ và tên <input type="text" class="input" name="fullName" [(ngModel)]="form.fullName"
+                                                  required
+                                                  autocomplete="off"/>
+            </label>
+          }
+          <label [ngClass]="{'col-3': editMode}">Giới tính
+            <select class="input" [(ngModel)]="form.gender" name="gender" required>
+              <option value="" disabled selected>-- Chọn giới tính --</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Khác">Khác</option>
+            </select>
+          </label>
+          <label>Tuổi <input type="number" class="input" [(ngModel)]="form.age" name="age" required
+                             autocomplete="off"/></label>
+          <label>SDT <input type="number" class="input" name="phone" [(ngModel)]="form.phone" required
+                            autocomplete="off"/></label>
+
+          <label>Lương <input type="number" class="input" [(ngModel)]="form.salary" name="salary" required/></label>
+          <label [ngClass]="{'col-3' : editMode}">Chức vụ
+            <select class="input" [(ngModel)]="form.role" name="role" required>
+              <option value="" disabled selected>-- Chọn chức vụ --</option>
+              <option value="ADMIN">Quản trị viên</option>
+              <option value="MANAGER">Quản lý</option>
+              <option value="STAFF">Nhân viên</option>
+            </select>
+          </label>
+          <label [ngClass]="{'col-3' : editMode}">
             Chi nhánh
             <select class="input" [(ngModel)]="form.branchId" name="branchId" required>
               <option value="" disabled selected>-- Chọn chi nhánh --</option>
@@ -85,7 +139,17 @@
 
             </select>
           </label>
-
+          <label class="full">
+            Địa chỉ
+            <textarea
+              class="input textarea"
+              [(ngModel)]="form.address"
+              name="address"
+              required
+              rows="3"
+              autocomplete="off">
+                </textarea>
+          </label>
           <div class="form-actions">
             <button class="btn" type="submit">Lưu</button>
             <button class="btn" type="button" (click)="closeForm()">Hủy</button>

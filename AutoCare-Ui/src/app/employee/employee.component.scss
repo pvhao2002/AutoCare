@@ -1,1 +1,62 @@
-//comment
+.employee-modal {
+  .modal {
+    background: #0d1117;
+    border-radius: 16px;
+    padding: 32px 36px;
+    width: min(95%, 680px);
+    height: min(80%, 800px);
+    color: #e2e8f0;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 16px 18px;
+
+    .textarea {
+      resize: none;
+      min-height: 70px;
+      line-height: 1.5;
+    }
+
+    textarea.input {
+      font-family: inherit;
+    }
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    grid-column: span 2;
+
+    &.col-1 {
+      grid-column: span 1;
+    }
+
+    &.col-3 {
+      grid-column: span 3;
+    }
+
+    &.col-4 {
+      grid-column: span 4;
+    }
+
+    &.col-6 {
+      grid-column: span 6;
+    }
+
+    &.full {
+      grid-column: 1 / -1;
+    }
+  }
+
+
+  .input {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .form-actions {
+    grid-column: 1 / -1;
+  }
+}
